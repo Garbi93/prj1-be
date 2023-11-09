@@ -11,7 +11,7 @@ public class BoardService {
 
     private final BoardMapper mapper;
 
-    public void save(Board board) {
-        mapper.insert(board);
+    public boolean save(Board board) {
+        return mapper.insert(board) == 1;
     }
 }
