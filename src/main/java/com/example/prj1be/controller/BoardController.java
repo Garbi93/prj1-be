@@ -14,4 +14,5 @@ public class BoardController {
     public void add() {
         System.out.println("BoardController.add");
     }
+
 }
