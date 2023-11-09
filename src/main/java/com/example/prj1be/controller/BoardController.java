@@ -27,4 +27,9 @@ public class BoardController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+    @GetMapping("list")
+    public void findlist(Board board) {
+        service.findboard(board);
+    }
 }

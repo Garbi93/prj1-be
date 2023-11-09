@@ -32,4 +32,8 @@ public class BoardService {
         }
         return true;
     }
+
+    public void findboard(Board board) {
+        mapper.find(board);
+    }
 }
