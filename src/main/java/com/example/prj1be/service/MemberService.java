@@ -13,4 +13,7 @@ public class MemberService {
         mapper.insert(member);
     }
 
+    public String getId(String id) {
+        return mapper.selectId(id);
+    }
 }
