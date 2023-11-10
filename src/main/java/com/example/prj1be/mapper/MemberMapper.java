@@ -19,4 +19,11 @@ SELECT  id FROM member
 WHERE id = #{id}
 """)
     String selectId(String id);
+
+    @Select("""
+        SELECT email FROM member
+        WHERE email = #{email}
+        """)
+    String selectEmail(String email);
+
 }
