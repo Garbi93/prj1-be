@@ -12,8 +12,16 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService service;
     @PostMapping("signup")
-    public void signup(@RequestBody Member member) {
-        service.add(member);
+    public ResponseEntity signup(@RequestBody Member member) {
+        if(service.validate(member)) {
+            if(service.add(member)){
+                return ResponseEntity.ok().build();
+            }else {
+                return ResponseEntity.internalServerError().build();
+            }
+        }else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping(value = "check", params = "id")
