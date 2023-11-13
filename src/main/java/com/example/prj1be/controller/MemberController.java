@@ -50,8 +50,9 @@ public class MemberController {
     }
 
     @GetMapping
-    public void view (String id) {
-        System.out.println("id = " + id);
+    public ResponseEntity<Member> view (String id) {
+        Member member =  service.getMember(id);
+        return ResponseEntity.ok(member);
     }
 
 
