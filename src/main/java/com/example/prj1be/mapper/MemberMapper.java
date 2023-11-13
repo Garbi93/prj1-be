@@ -9,8 +9,8 @@ import java.util.List;
 public interface MemberMapper {
 
     @Insert("""
-        INSERT INTO member(id,password, email)
-        VALUE (#{id},#{password},#{email})
+        INSERT INTO member(id,password, email, nickName)
+        VALUE (#{id},#{password},#{email},#{nickName})
         """)
     int insert(Member member);
 
@@ -27,7 +27,13 @@ WHERE id = #{id}
     String selectEmail(String email);
 
     @Select("""
-    SELECT id, password, email, inserted FROM member
+        SELECT nickName FROM member
+        WHERE nickName = #{nickName}
+        """)
+    String selectNickName(String nickName);
+
+    @Select("""
+    SELECT id, password, email, nickName ,inserted FROM member
     ORDER BY inserted DESC;
     """)
     List<Member> selectAll();
@@ -52,9 +58,12 @@ WHERE id = #{id}
         <if test="password != ''"> 
             password = #{password},
         </if>
-            email = #{email}
+            email = #{email},
+            nickName = #{nickName}
         WHERE id = #{id}
         </script>
         """)
     int update(Member member);
+
+
 }
