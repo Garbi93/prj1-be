@@ -1,6 +1,7 @@
 package com.example.prj1be.mapper;
 
 import com.example.prj1be.domain.Member;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -39,4 +40,11 @@ WHERE id = #{id}
         WHERE id = #{id}
         """)
     Member selectById(String id);
+
+
+    @Delete("""
+        DELETE FROM member
+        WHERE id = #{id}
+        """)
+    int deleteById(String id);
 }
