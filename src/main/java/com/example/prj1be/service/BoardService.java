@@ -49,4 +49,9 @@ public class BoardService {
     public boolean update(Board board) {
         return mapper.update(board) == 1;
     }
+
+    public boolean hasAccess(Integer id, Member login) {
+        Board board = mapper.selectById(id);
+        return board.getWriter().equals(login.getId()); //  작성자와 로그인한 사람이 같은지 확인
+    }
 }
