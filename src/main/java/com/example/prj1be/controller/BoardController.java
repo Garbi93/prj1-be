@@ -1,6 +1,7 @@
 package com.example.prj1be.controller;
 
 import com.example.prj1be.domain.Board;
+import com.example.prj1be.domain.Member;
 import com.example.prj1be.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,11 @@ public class BoardController {
     private final BoardService service;
 
     @PostMapping("add")
-    public ResponseEntity add(@RequestBody Board board) {
+    public ResponseEntity add(@RequestBody Board board,
+                              @SessionAttribute(value = "login", required = false) Member login) {
+
+        System.out.println("login = " + login);
+
         if (!service.validate(board)){
             return ResponseEntity.badRequest().build();
         }
