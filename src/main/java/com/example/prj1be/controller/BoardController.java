@@ -68,7 +68,17 @@ public class BoardController {
     }
 
     @PutMapping("edit")
-    public ResponseEntity edit(@RequestBody Board board) {
+    public ResponseEntity edit(@RequestBody Board board,
+                               @SessionAttribute(value = "login",required = false) Member login) {
+        if(login == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); //401
+        }
+
+        if(!service.hasAccess(board.getId(),login)){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403
+        }
+
+
 //        System.out.println("board = " + board);
         if (service.validate(board)) {
             if (service.update(board)){
