@@ -13,6 +13,7 @@ import java.util.List;
 public class BoardService {
 
     private final BoardMapper mapper;
+    private final MemberService memberService;
 
     public boolean save(Board board, Member login) {
         board.setWriter(login.getId());
@@ -51,7 +52,18 @@ public class BoardService {
     }
 
     public boolean hasAccess(Integer id, Member login) {
+        // admin 인지 먼저 확인 후
+        if(memberService.isAdmin(login)) {
+            return true;
+        }
+        // 어드민이 아니면 자신이 맞는지 확인
         Board board = mapper.selectById(id);
         return board.getWriter().equals(login.getId()); //  작성자와 로그인한 사람이 같은지 확인
     }
+
+
+
+
+
+
 }
