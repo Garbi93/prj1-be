@@ -136,5 +136,10 @@ public class MemberController {
         }
     }
 
+    @GetMapping("login")
+    public Member login(@SessionAttribute(value = "login",required = false) Member login) {
+        return login;
+    }
+
 
 }
