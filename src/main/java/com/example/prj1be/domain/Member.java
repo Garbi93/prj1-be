@@ -3,6 +3,7 @@ package com.example.prj1be.domain;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class Member {
@@ -11,4 +12,5 @@ public class Member {
     private String email;
     private String nickName;
     private LocalDateTime inserted;
+    private List<Auth> auth;
 }
