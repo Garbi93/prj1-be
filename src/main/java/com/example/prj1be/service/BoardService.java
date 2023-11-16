@@ -15,7 +15,6 @@ public class BoardService {
 
     private final BoardMapper mapper;
     private final CommentMapper commentMapper;
-    private final MemberService memberService;
 
     public boolean save(Board board, Member login) {
         board.setWriter(login.getId());
@@ -57,8 +56,11 @@ public class BoardService {
     }
 
     public boolean hasAccess(Integer id, Member login) {
+        if(login == null) {
+            return false;
+        }
         // admin 인지 먼저 확인 후
-        if(memberService.isAdmin(login)) {
+        if(login.isAdmin()) {
             return true;
         }
         // 어드민이 아니면 자신이 맞는지 확인
