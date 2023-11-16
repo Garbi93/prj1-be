@@ -81,6 +81,7 @@ public class MemberController {
 
     @DeleteMapping
     public ResponseEntity delete(String id,
+                                 HttpSession session,
                                  @SessionAttribute(value = "login", required = false)Member login) {
         if(login == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // 401
@@ -91,6 +92,8 @@ public class MemberController {
         }
 
         if (service.deleteMember(id)) {
+            session.invalidate();
+
             return ResponseEntity.ok().build();
         }
 
