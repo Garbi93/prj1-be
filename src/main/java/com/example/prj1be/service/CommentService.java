@@ -71,4 +71,8 @@ public class CommentService {
     public boolean removeByBoardId(Integer id) {
         return mapper.deleteByBoardId(id) == 1;
     }
+
+    public boolean removeByMemberId(String id) {
+        return mapper.deleteByMemberId(id) == 1;
+    }
 }

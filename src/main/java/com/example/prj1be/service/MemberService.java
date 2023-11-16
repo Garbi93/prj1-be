@@ -17,6 +17,7 @@ public class MemberService {
 
     private final MemberMapper mapper;
     private final BoardMapper boardMapper;
+    private final CommentService commentService;
 
     public boolean add(Member member) {
         return mapper.insert(member) == 1;
@@ -63,7 +64,11 @@ public class MemberService {
         // 1. 이 맴버가 작성한 게시물 삭제 -> boardMapper를 주입 받는다
         boardMapper.deleteByWriter(id);
 
-        // 2. 이 멤버 삭제
+        // 2-1 맴버 삭제전에 맴버가 작성했던 댓글들 삭제 하기
+        commentService.removeByMemberId(id);
+
+
+        // 2-2. 댓글 삭제후 이 멤버 삭제
         return mapper.deleteById(id) == 1;
     }
 
