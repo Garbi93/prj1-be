@@ -1,6 +1,7 @@
 package com.example.prj1be.service;
 
 import com.example.prj1be.domain.Board;
+import com.example.prj1be.domain.Comment;
 import com.example.prj1be.domain.Member;
 import com.example.prj1be.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ public class BoardService {
 
     private final BoardMapper mapper;
     private final MemberService memberService;
+    private final CommentService commentService;
 
     public boolean save(Board board, Member login) {
         board.setWriter(login.getId());
@@ -44,7 +46,10 @@ public class BoardService {
     }
 
     public boolean remove(Integer id) {
-        return mapper.deleteById(id) == 1;
+        commentService.removeByBoardId(id);
+            return mapper.deleteById(id) == 1;
+
+
     }
 
     public boolean update(Board board) {

@@ -68,8 +68,7 @@ public class CommentService {
     }
 
 
-
-
-
-
+    public boolean removeByBoardId(Integer id) {
+        return mapper.deleteByBoardId(id) == 1;
+    }
 }
