@@ -15,16 +15,26 @@ public interface BoardMapper {
     Integer insert(Board board);
 
     @Select("""
-        SELECT b.id,
-               b.title,
-               b.writer,
-               m.nickName,
-               b.inserted,
-               COUNT(c.id) countComment
-        FROM board b JOIN member m ON b.writer = m.id
-        LEFT JOIN comment c ON b.id = c.boardId
-        GROUP BY b.id
-        ORDER BY b.id DESC
+            SELECT b.id,
+                 b.title,
+                 b.writer,
+                 m.nickName,
+                 b.inserted,
+                 COALESCE(comment_count, 0) as countComment,
+                 COALESCE(like_count, 0) as countLike
+          FROM board b
+                   JOIN member m ON b.writer = m.id
+                   LEFT JOIN (
+              SELECT boardId, COUNT(id) AS comment_count
+              FROM comment
+              GROUP BY boardId
+          ) c ON b.id = c.boardId
+                   LEFT JOIN (
+              SELECT boardId, COUNT(id) AS like_count
+              FROM boardLike
+              GROUP BY boardId
+          ) bl ON b.id = bl.boardId
+          ORDER BY b.id DESC;
         """)
     List<Board> selectAll();
 
