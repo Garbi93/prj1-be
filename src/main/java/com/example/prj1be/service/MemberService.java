@@ -75,7 +75,7 @@ public class MemberService {
         // 1-2 게시물 번호들 loop 각 게시물 삭제 (boardService.remove)
         boardIdList.forEach((boardId) -> boardService.remove(boardId));
 
-        // 2-1 이 맴버가 좋아요 한것
+        // 2-1 이 맴버가 좋아요 한것 삭제하기
         likeMapper.deleteByMemberId(id);
 
 
