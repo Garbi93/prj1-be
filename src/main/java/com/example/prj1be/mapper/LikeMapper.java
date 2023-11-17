@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface LikeMapper {
 
@@ -41,4 +43,17 @@ public interface LikeMapper {
         WHERE boardId = #{id}
         """)
     void deleteByBoardId(Integer id);
+
+    @Delete("""
+        DELETE FROM boardLike
+        WHERE id = #{id}
+        """)
+    void deleteById(Integer id);
+
+    @Select("""
+        SELECT id
+        FROM boardLike
+        WHERE memberId = #{memberId}
+        """)
+    List<Integer> selectIdLikeByMemberId(String memberId);
 }
