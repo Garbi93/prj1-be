@@ -13,3 +13,5 @@ public class Comment {
     private LocalDateTime inserted;
     private String memberNickName;
 }
+
+
