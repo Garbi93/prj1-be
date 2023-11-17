@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -41,7 +42,11 @@ public class BoardController {
 
     // /api/boardList?p=6
     @GetMapping("list")
-    public List<Board> list(@RequestParam(value = "p",defaultValue = "1") Integer page) {
+    public Map<String, Object> list(@RequestParam(value = "p",defaultValue = "1") Integer page) {
+
+        // boardList, List<Board>
+        // pageInfo, ...
+        // 이런식으로 데이터를 넘길예정
         return service.list(page);
     }
 
