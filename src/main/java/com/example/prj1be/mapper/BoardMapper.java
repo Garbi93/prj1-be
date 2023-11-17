@@ -26,9 +26,10 @@ public interface BoardMapper {
                        LEFT JOIN comment c ON b.id = c.boardId
                       LEFT JOIN boardLike l ON b.id = l.boardId
           GROUP BY b.id
-          ORDER BY b.id DESC;
+          ORDER BY b.id DESC
+          LIMIT #{from}, 10
         """)
-    List<Board> selectAll();
+    List<Board> selectAll(Integer from);
 
     @Select("""
         SELECT 
