@@ -21,7 +21,7 @@ public class Board {
     private Integer countComment;
     private Integer countLike;
 
-    private List<String> fileNames;
+    private List<BoardFile> files;
 
     public String getAgo() {
         return AppUtil.getAgo(inserted, LocalDateTime.now());
