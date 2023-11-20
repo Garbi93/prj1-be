@@ -43,7 +43,8 @@ public class BoardService {
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> pageInfo = new HashMap<>();
 
-        int countAll = mapper.countAll();
+        // int countAll = mapper.countAll();
+        int countAll = mapper.countAll("%" + keyword + "%");
         int lastPageNumber = (countAll -1) / 10 + 1;
         int startPageNumber = (page -1)/ 10 * 10 + 1;
         int endPageNumber = startPageNumber + 9;
