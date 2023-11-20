@@ -12,6 +12,7 @@ public interface BoardMapper {
         INSERT INTO board (title,content,writer)
         VALUES (#{title}, #{content}, #{writer})
         """)
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     Integer insert(Board board);
 
     @Select("""

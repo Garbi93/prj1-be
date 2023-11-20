@@ -23,7 +23,7 @@ public class BoardController {
 
     @PostMapping("add")
     public ResponseEntity add(Board board,
-                              @RequestParam(value = "file", required = false) MultipartFile file,
+                              @RequestParam(value = "files[]", required = false) MultipartFile[] files,
                               @SessionAttribute(value = "login", required = false) Member login) {
 
         if(login == null) {
@@ -35,7 +35,7 @@ public class BoardController {
         }
 
 
-        if(service.save(board, login)) {
+        if(service.save(board, files, login)) {
             return ResponseEntity.ok().build();
         }else {
             return ResponseEntity.internalServerError().build();
