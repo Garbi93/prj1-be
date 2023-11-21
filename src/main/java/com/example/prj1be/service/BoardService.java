@@ -155,6 +155,7 @@ public class BoardService {
         return mapper.deleteById(id) == 1;
     }
 
+    // (s3 bucket 에서 삭제도 하고 db table 에서도 삭제 되도록 코드 수정 )
     private void deleteFile(Integer id) {
         // 파일명 조회
         List<BoardFile> boardFiles = fileMapper.selectNameByBoardId(id);
