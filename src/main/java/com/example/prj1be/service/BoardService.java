@@ -176,7 +176,37 @@ public class BoardService {
         fileMapper.deleteByBoardId(id);
     }
 
-    public boolean update(Board board) {
+    public boolean update(Board board, List<Integer> removeFileIds, MultipartFile[] uploadFiles) throws IOException {
+
+        // 파일 지우기
+        if(removeFileIds != null) {
+            for(Integer id : removeFileIds){
+            // s3에서 지우기
+            BoardFile file = fileMapper.selectById(id);
+                String key = "prj1/" + board.getId() + "/" +file.getName();
+                DeleteObjectRequest objectRequest = DeleteObjectRequest.builder()
+                        .bucket(bucket)
+                        .key(key)
+                        .build();
+                s3.deleteObject(objectRequest);
+
+                // db에서 지우기
+                fileMapper.deleteById(id);
+            }
+        }
+
+        // 파일 추가하기
+        if(uploadFiles != null){
+            // s3에 올리기
+            for(MultipartFile file : uploadFiles) {
+                upload(board.getId(), file);
+
+                // db에 추가하기
+                fileMapper.insert(board.getId(), file.getOriginalFilename());
+            }
+
+        }
+
         return mapper.update(board) == 1;
     }
 
