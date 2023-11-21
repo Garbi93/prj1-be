@@ -3,6 +3,7 @@ package com.example.prj1be.domain;
 import com.example.prj1be.util.AppUtil;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
+import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class Board {
     private LocalDateTime inserted;
     private Integer countComment;
     private Integer countLike;
+    private Integer countFile;
 
     private List<BoardFile> files;
 
