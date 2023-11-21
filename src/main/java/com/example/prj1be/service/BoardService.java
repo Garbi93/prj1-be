@@ -146,6 +146,9 @@ public class BoardService {
         // 2. 좋아요 레코드 지우기
         likeMapper.deleteByBoardId(id);
 
+        // 3. 이미지 지우기
+        fileMapper.deleteByBoardId(id);
+
         return mapper.deleteById(id) == 1;
     }
 
