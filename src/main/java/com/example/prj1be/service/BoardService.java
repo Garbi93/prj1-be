@@ -176,7 +176,17 @@ public class BoardService {
         fileMapper.deleteByBoardId(id);
     }
 
-    public boolean update(Board board) {
+    public boolean update(Board board, MultipartFile[] files) throws IOException {
+        if(files != null) {
+            for (int i = 0; i < files.length; i++) {
+                // id(auto increment), boardId, name
+                fileMapper.insert(board.getId(), files[i].getOriginalFilename());
+
+                // 실제 파일을 s3 bucket에 upload
+                // 일단 local에 저장
+                upload(board.getId(), files[i]);
+            }
+        }
         return mapper.update(board) == 1;
     }
 

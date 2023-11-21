@@ -28,4 +28,16 @@ public interface FileMapper {
         WHERE boardId = #{boardId}
         """)
     int deleteByBoardId(Integer boardId);
+
+    @Delete("""
+        DELETE FROM boardFile
+        WHERE id = #{fileId}
+        """)
+    int deleteById(Integer fileId);
+
+    @Select("""
+        SELECT * FROM boardFile
+        WHERE id = #{fileId}
+        """)
+    BoardFile selectById(Integer fileId);
 }
