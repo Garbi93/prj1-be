@@ -47,12 +47,13 @@ public class BoardController {
     // /api/boardList?k=java
     @GetMapping("list")
     public Map<String, Object> list(@RequestParam(value = "p",defaultValue = "1") Integer page,
-                                    @RequestParam(value = "k",defaultValue = "") String keyword) {
+                                    @RequestParam(value = "k",defaultValue = "") String keyword,
+                                    @RequestParam(value = "c",defaultValue = "all")String category) {
 
         // boardList, List<Board>
         // pageInfo, ...
         // 이런식으로 데이터를 넘길예정
-        return service.list(page, keyword);
+        return service.list(page, keyword, category);
     }
 
     @GetMapping("id/{id}")
